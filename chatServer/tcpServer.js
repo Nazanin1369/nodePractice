@@ -6,7 +6,8 @@ var chatServer = net.createServer(),
 chatServer.on('connection', function(socket) {
 
     socket.name = socket.remoteAddress + " - " + socket.remotePort;
-
+    client.write('Welcome ' + socket.name + ' !');
+    console.log(socket.name + ' joined.');
     clients.push(socket);
 
     socket.on('data', function(data) {
@@ -17,6 +18,10 @@ chatServer.on('connection', function(socket) {
         clients.splice(clients.indexOf(socket), 1);
         broadcast(socket.name + " left the chat.\n");
     });
+
+    client.on('error', function(e) {
+        console.log(e);
+    })
 
     function broadcast(message, sender) {
         clients.forEach(function(client) {
