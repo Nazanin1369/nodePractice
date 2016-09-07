@@ -1,1 +1,1 @@
-### My NodeJS practice and review
+### My NodeJS practice and review sessions
